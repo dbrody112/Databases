@@ -11,22 +11,11 @@ import os
 import regex as re
 
 
-# In[ ]:
-
-
-
-
-
-# In[6]:
-
 
 def findEndIndex(string):
     for i in range(len(string)):
         if(string[i] == "        <br/>"or string[i] == "        ' <br/> '"):
             return i;
-
-
-# In[7]:
 
 
 def getPages(url = "https://www.hrc.org/resources/healthcare-facilities/",string_input="New Jersey"):
@@ -39,13 +28,7 @@ def getPages(url = "https://www.hrc.org/resources/healthcare-facilities/",string
     
 
 
-# In[8]:
-
-
 getPages()
-
-
-# In[30]:
 
 
 #p class = heading-32 for full scores
@@ -134,20 +117,5 @@ def scrape(url = "https://www.hrc.org/resources/healthcare-facilities/",string_i
             hospital_info.append(attributes)
             sub_criteria_info.append(sub_criteria)
             criteria_info.append(criteria)
-    
-        
-        
 
-
-# In[10]:
-
-
-#hospital_info=[]
-#sub_criteria_info = []
-
-
-# In[11]:
-
-
-#scrape(hospital_info = hospital_info,sub_criteria_info = sub_criteria_info)
 
