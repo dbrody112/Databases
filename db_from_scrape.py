@@ -9,8 +9,10 @@ from sqlalchemy import create_engine
 engine = create_engine("mysql://root:new_password@localhost/hospitals")
 Session = sessionmaker(bind = engine)
 session = Session()
-from
+from db_scraper import load_data
 
+
+criteria_df, sub_criteria_df, final_product_hospital_info = load_data()
 
 @as_declarative()
 class Base(object):
