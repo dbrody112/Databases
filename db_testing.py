@@ -1,15 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
 
-# In[1]:
-
-
-#Create a Sailors and Boats dataset in Python
-#@eugsokolov
-
-
-#create a new sqlite database
-#create database fixture
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -154,52 +143,25 @@ class Boat(Base):
                              self.bid, self.bname, self.color,self.length)
 
 
-# In[3]:
-
-
 Base.metadata.create_all(engine)
-
-
-# In[ ]:
 
 
 for(sid,sname,rating,age) in sailors:
     session.add(Sailor(sid = sid, sname = sname, rating = rating, age = age))
 
 
-# In[ ]:
-
-
 session.commit()
-
-
-# In[ ]:
-
 
 for(sid,bid,v) in reserves:
     session.add(Reservation(sid=sid,bid=bid,day=date(int(v[:4]), int(v[5:7]), int(v[8:10]))))
 
-
-# In[ ]:
-
-
 session.commit()
-
-
-# In[ ]:
-
 
 for (bid, bname, color, length) in boats:
     session.add(Boat(bid=bid, bname = bname, color = color, length = length))
 
 
-# In[ ]:
-
-
 session.commit()
-
-
-# In[345]:
 
 
 from sqlalchemy.sql import select
@@ -267,75 +229,20 @@ def eighthQueryTest(Sailor,Boat,Reservation):
     assert len(x) == 6    
     
 
-
-# In[346]:
-
-
-x
-
-
-# In[347]:
-
-
 firstQueryTest(Boat,Reservation)
-
-
-# In[348]:
-
 
 secondQueryTest(Sailor,Boat,Reservation)
 
-
-# In[349]:
-
-
 thirdQueryTest(Sailor,Boat,Reservation)
-
-
-# In[350]:
-
 
 fourthQueryTest(Boat,Reservation)
 
-
-# In[351]:
-
-
 fifthQueryTest(Sailor,Boat,Reservation)
-
-
-# In[352]:
-
 
 sixthQueryTest(Sailor)
 
-
-# In[353]:
-
-
 seventhQueryTest(Sailor)
 
-
-# In[354]:
-
-
 eighthQueryTest(Sailor,Boat,Reservation)
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-#Base.metadata.drop_all(engine) 
-
-
-# In[ ]:
-
-
 
 
