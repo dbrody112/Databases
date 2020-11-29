@@ -1,11 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
 
-# In[92]:
-
-
-#Create a Sailors and Boats dataset in Python
-#@eugsokolov
 
 
 #create a new sqlite database
@@ -17,17 +10,12 @@ from sqlalchemy.orm import sessionmaker
 engine = create_engine('sqlite:///sailors.db',echo = True)
 
 
-# In[114]:
-
-
 def campaignPerformanceDay(itype="all",inventory_date = None):
     if(itype == "one"):
         return session.query(func.sum(Boat.price_per_hour * (Reservation.time_out - Reservation.time_in)),Reservation.day,Campaign.advertisements,Campaign.sales).    select_from(Reservation).join(Boat).join(Campaign, Reservation.day == Campaign.date).filter(Reservation.day == inventory_date).all() 
     if(itype == "all"):
         return session.query(func.sum(Boat.price_per_hour * (Reservation.time_out - Reservation.time_in)),Reservation.day,Campaign.advertisements,Campaign.sales).    select_from(Reservation).join(Boat).join(Campaign, Reservation.day == Campaign.date).group_by(Reservation.day).all() 
 
-
-# In[115]:
 
 
 import datetime as dt
@@ -72,37 +60,19 @@ def campaignPerformanceOverTime(days=0,itype="all",inventory_date = None):
             
         return h
     
-    #
-
-
-# In[116]:
-
-
+ 
 campaignPerformanceOverTime(days = 1, itype = "one", inventory_date = date(1998,10,10))
 
 
-# In[117]:
-
-
 campaignPerformanceDay()
-
-
-# In[129]:
 
 
 def latesDesc():
     return session.query(func.count(Schedule.schedule_id),Schedule.name).    select_from(Schedule).    filter(Schedule.signed_out-Schedule.signed_in < (17-9)).group_by(Schedule.name).    order_by(func.count(Schedule.schedule_id).desc()).all()
 
 
-# In[143]:
-
-
 def salesAsc():
     return session.query(func.sum(Boat.price_per_hour * (Reservation.time_out - Reservation.time_in)),Schedule.name).    select_from(Reservation).join(Boat).join(Schedule).    group_by(Schedule.name).order_by(func.sum(Boat.price_per_hour * (Reservation.time_out - Reservation.time_in))).all()
-
-
-# In[149]:
-
 
 def firingProcess(priority = 'lates'):
     if(priority == 'lates'):
@@ -111,13 +81,8 @@ def firingProcess(priority = 'lates'):
         return (salesAsc()[0][1])    
 
 
-# In[150]:
-
-
 firingProcess()
 
-
-# In[ ]:
 
 
 def boat_availability(boat,date):
